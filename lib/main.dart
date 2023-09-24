@@ -79,6 +79,14 @@ Future<void> main() async {
                     onGenerateRoute: RouteGenerator.getRoute,
                     initialRoute: Routes.splashRoute,
                     home: child,
+                    builder: (BuildContext context, Widget? child) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaleFactor: 1.0,
+                ), //set desired text scale factor here
+                child: child!,
+              );
+            },
                     navigatorKey: AppShared.navKey,
                   );
                 },
