@@ -56,30 +56,27 @@ Future<void> main() async {
       saveLocale: true,
       startLocale: ENGLISH_LOCAL,
       child: Phoenix(
-          child: MultiProvider(
-              providers: [],
-              child: ScreenUtilInit(
-                designSize: const Size(360, 690),
-                minTextAdapt: true,
-                splitScreenMode: true,
-                builder: (context, child) {
-                  return MaterialApp(
-                    localizationsDelegates: [
-                      EasyLocalization.of(context)!.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales:
-                        EasyLocalization.of(context)!.supportedLocales,
-                    locale: EasyLocalization.of(context)!.locale,
-                    debugShowCheckedModeBanner: false,
-                    //showPerformanceOverlay: true,
-                    title: 'Alassema',
-                    onGenerateRoute: RouteGenerator.getRoute,
-                    initialRoute: Routes.splashRoute,
-                    home: child,
-                    builder: (BuildContext context, Widget? child) {
+          child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp(
+            localizationsDelegates: [
+              EasyLocalization.of(context)!.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: EasyLocalization.of(context)!.supportedLocales,
+            locale: EasyLocalization.of(context)!.locale,
+            debugShowCheckedModeBanner: false,
+            //showPerformanceOverlay: true,
+            title: 'Alassema',
+            onGenerateRoute: RouteGenerator.getRoute,
+            initialRoute: Routes.splashRoute,
+            home: child,
+            builder: (BuildContext context, Widget? child) {
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(
                   textScaleFactor: 1.0,
@@ -87,37 +84,9 @@ Future<void> main() async {
                 child: child!,
               );
             },
-                    navigatorKey: AppShared.navKey,
-                  );
-                },
-                child: const AppWalkthroughScreen(),
-              )
-              // ScreenUtilInit(
-              //   designSize: const Size(334.7, 719.8),
-              //   minTextAdapt: true,
-              //   splitScreenMode: true,
-              //   builder: (context , child) {
-              //     return MaterialApp(
-              //       localizationsDelegates: context.localizationDelegates,
-              //       supportedLocales: context.supportedLocales,
-              //       locale: context.locale,
-              //       debugShowCheckedModeBanner: false,
-              //       onGenerateRoute: RouteGenerator.getRoute,
-              //
-              //       initialRoute: Routes.splashRoute,
-              //       theme: getApplicationTheme(),
-              //       title: 'ALASSEMA',
-              //       // You can use the library anywhere in the app even in theme
-              //       // theme: ThemeData(
-              //       //   primarySwatch: Colors.teal,
-              //       //   textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
-              //       //    // canvasColor: Colors.transparent
-              //       // ),
-              //       home: child,
-              //       navigatorKey: AppShared.navKey,
-              //     );
-              //   },
-              //   child:  const SplashView(),
-              // ),
-              ))));
+            navigatorKey: AppShared.navKey,
+          );
+        },
+        child: const AppWalkthroughScreen(),
+      ))));
 }

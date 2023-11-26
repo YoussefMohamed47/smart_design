@@ -40,7 +40,7 @@ class DioInterceptor {
 
   // get new auth token via refresh token
   Future<bool> callRefreshTokenApi(DioError error) async {
-    if (error.type == DioErrorType.response) {
+    if (error.type == DioExceptionType.badResponse) {
       print("error.response!.statusCode dddd ${error.response!.statusCode}");
       //On authToken expiry ( Status Code 401) try to request new one with refresh token
       //if refreshing authToken token fails delete authToken and redirect to login page

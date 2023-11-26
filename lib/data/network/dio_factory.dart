@@ -38,8 +38,8 @@ class DioFactory {
     dio.options = BaseOptions(
       baseUrl: Constants.baseUrl,
       headers: headers,
-      receiveTimeout: Constants.apiTimeOut,
-      sendTimeout: Constants.apiTimeOut,
+      receiveTimeout: const Duration(milliseconds: Constants.apiTimeOut),
+      sendTimeout: const Duration(milliseconds: Constants.apiTimeOut),
     );
 
     dio.interceptors.addAll(
