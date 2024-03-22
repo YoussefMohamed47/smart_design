@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:questionnaire/data/repository/make_form_template_impl.dart';
+import 'package:questionnaire/domain/repository/makeFormTemplete/make_form_template_repoistory.dart';
+import 'package:questionnaire/domain/usecase/make_form_template_usecase.dart';
+import 'package:questionnaire/screens/make_form_template/viewmodel/make_form_template_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/data_source/local_data_source.dart';
@@ -13,13 +17,13 @@ import 'app_prefs.dart';
 
 final instance = GetIt.instance;
 
-Future<void> initAppModule() async {
+Future<void> initServeyAppModule() async {
   // app module, its a module where we put all generic dependencies
 
   // shared prefs instance
-  final sharedPrefs = await SharedPreferences.getInstance();
-
-  instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
+  // final sharedPrefs = await SharedPreferences.getInstance();
+  //
+  // instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
 
   // app prefs instance
   instance
@@ -39,6 +43,11 @@ Future<void> initAppModule() async {
   //------------------------------------------ categories ------------------------------------------------------
   instance.registerLazySingleton<AppCategoriesServiceClient>(
       () => AppCategoriesServiceClient(dio));
+
+
+  instance.registerFactory<MakeFormTemplateUseCase>(() => MakeFormTemplateUseCase(instance()));
+
+
   // instance.registerLazySingleton<CategoriesRemoteDataSourceImpl>(() =>
   //     CategoriesRemoteDataSourceImpl(instance<AppCategoriesServiceClient>()));
   // instance.registerLazySingleton<CategoriesRepository>(
@@ -50,12 +59,18 @@ Future<void> initAppModule() async {
   //------------------------------------------ categories ------------------------------------------------------
 
   // remote data source
+
+
+  instance.registerLazySingleton<MakeFormTemplateRepository>(() =>
+      MakeFormTemplateRepositoryImpl(instance(), instance(), instance()));
   instance.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(instance<AppServiceClient>()));
 
   // local data source
   instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
 
+  instance
+      .registerFactory<MakeFormTemplateViewModel>(() => MakeFormTemplateViewModel(instance()));
   // repository
 
   // instance.registerLazySingleton<AuthRepository>(
@@ -69,10 +84,10 @@ Future<void> initAppModule() async {
   // instance.registerLazySingleton<AllCompaniesRepoistory>(
   //     () => AllCompaniesRepositoryImpl(instance(), instance(), instance()));
   //instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
-  // instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+ // instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
 
   // instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
-  // instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
+
   // instance
   //     .registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
   // instance.registerFactory<ImagePicker>(() => ImagePicker());

@@ -1,5 +1,5 @@
-import 'package:clean_arch_base/presentation/resources/styles_manager.dart';
-import 'package:clean_arch_base/presentation/resources/values_manager.dart';
+import 'package:questionnaire/presentation/resources/styles_manager.dart';
+import 'package:questionnaire/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'color_manager.dart';

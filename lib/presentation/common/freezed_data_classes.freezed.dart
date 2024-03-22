@@ -63,22 +63,22 @@ class _$LoginObjectCopyWithImpl<$Res, $Val extends LoginObject>
 }
 
 /// @nodoc
-abstract class _$$_LoginObjectCopyWith<$Res>
+abstract class _$$LoginObjectImplCopyWith<$Res>
     implements $LoginObjectCopyWith<$Res> {
-  factory _$$_LoginObjectCopyWith(
-          _$_LoginObject value, $Res Function(_$_LoginObject) then) =
-      __$$_LoginObjectCopyWithImpl<$Res>;
+  factory _$$LoginObjectImplCopyWith(
+          _$LoginObjectImpl value, $Res Function(_$LoginObjectImpl) then) =
+      __$$LoginObjectImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String userName, String password});
 }
 
 /// @nodoc
-class __$$_LoginObjectCopyWithImpl<$Res>
-    extends _$LoginObjectCopyWithImpl<$Res, _$_LoginObject>
-    implements _$$_LoginObjectCopyWith<$Res> {
-  __$$_LoginObjectCopyWithImpl(
-      _$_LoginObject _value, $Res Function(_$_LoginObject) _then)
+class __$$LoginObjectImplCopyWithImpl<$Res>
+    extends _$LoginObjectCopyWithImpl<$Res, _$LoginObjectImpl>
+    implements _$$LoginObjectImplCopyWith<$Res> {
+  __$$LoginObjectImplCopyWithImpl(
+      _$LoginObjectImpl _value, $Res Function(_$LoginObjectImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_LoginObjectCopyWithImpl<$Res>
     Object? userName = null,
     Object? password = null,
   }) {
-    return _then(_$_LoginObject(
+    return _then(_$LoginObjectImpl(
       null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_LoginObjectCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoginObject implements _LoginObject {
-  _$_LoginObject(this.userName, this.password);
+class _$LoginObjectImpl implements _LoginObject {
+  _$LoginObjectImpl(this.userName, this.password);
 
   @override
   final String userName;
@@ -119,7 +119,7 @@ class _$_LoginObject implements _LoginObject {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginObject &&
+            other is _$LoginObjectImpl &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.password, password) ||
@@ -132,13 +132,13 @@ class _$_LoginObject implements _LoginObject {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginObjectCopyWith<_$_LoginObject> get copyWith =>
-      __$$_LoginObjectCopyWithImpl<_$_LoginObject>(this, _$identity);
+  _$$LoginObjectImplCopyWith<_$LoginObjectImpl> get copyWith =>
+      __$$LoginObjectImplCopyWithImpl<_$LoginObjectImpl>(this, _$identity);
 }
 
 abstract class _LoginObject implements LoginObject {
   factory _LoginObject(final String userName, final String password) =
-      _$_LoginObject;
+      _$LoginObjectImpl;
 
   @override
   String get userName;
@@ -146,7 +146,7 @@ abstract class _LoginObject implements LoginObject {
   String get password;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginObjectCopyWith<_$_LoginObject> get copyWith =>
+  _$$LoginObjectImplCopyWith<_$LoginObjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -229,11 +229,11 @@ class _$RegisterObjectCopyWithImpl<$Res, $Val extends RegisterObject>
 }
 
 /// @nodoc
-abstract class _$$_RegisterObjectCopyWith<$Res>
+abstract class _$$RegisterObjectImplCopyWith<$Res>
     implements $RegisterObjectCopyWith<$Res> {
-  factory _$$_RegisterObjectCopyWith(
-          _$_RegisterObject value, $Res Function(_$_RegisterObject) then) =
-      __$$_RegisterObjectCopyWithImpl<$Res>;
+  factory _$$RegisterObjectImplCopyWith(_$RegisterObjectImpl value,
+          $Res Function(_$RegisterObjectImpl) then) =
+      __$$RegisterObjectImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -246,11 +246,11 @@ abstract class _$$_RegisterObjectCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RegisterObjectCopyWithImpl<$Res>
-    extends _$RegisterObjectCopyWithImpl<$Res, _$_RegisterObject>
-    implements _$$_RegisterObjectCopyWith<$Res> {
-  __$$_RegisterObjectCopyWithImpl(
-      _$_RegisterObject _value, $Res Function(_$_RegisterObject) _then)
+class __$$RegisterObjectImplCopyWithImpl<$Res>
+    extends _$RegisterObjectCopyWithImpl<$Res, _$RegisterObjectImpl>
+    implements _$$RegisterObjectImplCopyWith<$Res> {
+  __$$RegisterObjectImplCopyWithImpl(
+      _$RegisterObjectImpl _value, $Res Function(_$RegisterObjectImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -263,7 +263,7 @@ class __$$_RegisterObjectCopyWithImpl<$Res>
     Object? password = null,
     Object? profilePicture = null,
   }) {
-    return _then(_$_RegisterObject(
+    return _then(_$RegisterObjectImpl(
       null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -294,8 +294,8 @@ class __$$_RegisterObjectCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RegisterObject implements _RegisterObject {
-  _$_RegisterObject(this.userName, this.countryMobileCode, this.mobileNumber,
+class _$RegisterObjectImpl implements _RegisterObject {
+  _$RegisterObjectImpl(this.userName, this.countryMobileCode, this.mobileNumber,
       this.email, this.password, this.profilePicture);
 
   @override
@@ -320,7 +320,7 @@ class _$_RegisterObject implements _RegisterObject {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegisterObject &&
+            other is _$RegisterObjectImpl &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.countryMobileCode, countryMobileCode) ||
@@ -341,8 +341,9 @@ class _$_RegisterObject implements _RegisterObject {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegisterObjectCopyWith<_$_RegisterObject> get copyWith =>
-      __$$_RegisterObjectCopyWithImpl<_$_RegisterObject>(this, _$identity);
+  _$$RegisterObjectImplCopyWith<_$RegisterObjectImpl> get copyWith =>
+      __$$RegisterObjectImplCopyWithImpl<_$RegisterObjectImpl>(
+          this, _$identity);
 }
 
 abstract class _RegisterObject implements RegisterObject {
@@ -352,7 +353,7 @@ abstract class _RegisterObject implements RegisterObject {
       final String mobileNumber,
       final String email,
       final String password,
-      final String profilePicture) = _$_RegisterObject;
+      final String profilePicture) = _$RegisterObjectImpl;
 
   @override
   String get userName;
@@ -368,6 +369,6 @@ abstract class _RegisterObject implements RegisterObject {
   String get profilePicture;
   @override
   @JsonKey(ignore: true)
-  _$$_RegisterObjectCopyWith<_$_RegisterObject> get copyWith =>
+  _$$RegisterObjectImplCopyWith<_$RegisterObjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

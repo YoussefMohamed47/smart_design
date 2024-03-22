@@ -1,4 +1,4 @@
-import 'package:clean_arch_base/presentation/resources/strings_manager.dart';
+import 'package:questionnaire/presentation/resources/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

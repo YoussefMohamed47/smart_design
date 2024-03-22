@@ -1,4 +1,4 @@
-import 'package:clean_arch_base/presentation/common/state_renderer/state_renderer.dart';
+import 'package:questionnaire/presentation/common/state_renderer/state_renderer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

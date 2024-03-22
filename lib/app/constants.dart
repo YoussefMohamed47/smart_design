@@ -17,4 +17,9 @@ class Constants {
   static const String AllCOMPOUNDSKEYCACHE = 'All_COMPOUNDS_KEY_CACHE';
   static const String AllCOMPANIESSKEYCACHE = 'All_COMPANIES_KEY_CACHE';
   static const String noDataText = 'no_data';
+
+
+  static const arCairoFontFamilyRegular = "Hecan";
+  static const arCairoFontFamilyBold = "Hecan";
+  static const hecan = "Hecan";
 }
