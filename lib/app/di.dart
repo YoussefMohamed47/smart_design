@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/data_source/local_data_source.dart';
 import '../data/data_source/remote_data_source.dart';
-import '../data/network/alassame_api.dart';
 import '../data/network/app_api.dart';
 import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
@@ -35,19 +34,6 @@ Future<void> initAppModule() async {
   Dio dio = await instance<DioFactory>().getDio();
   //app service client
   instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
-
-  //------------------------------------------ categories ------------------------------------------------------
-  instance.registerLazySingleton<AppCategoriesServiceClient>(
-      () => AppCategoriesServiceClient(dio));
-  // instance.registerLazySingleton<CategoriesRemoteDataSourceImpl>(() =>
-  //     CategoriesRemoteDataSourceImpl(instance<AppCategoriesServiceClient>()));
-  // instance.registerLazySingleton<CategoriesRepository>(
-  //     () => CategoriesRepositoryImpl(instance(), instance(), instance()));
-  // instance
-  //     .registerFactory<CategoriesUseCase>(() => CategoriesUseCase(instance()));
-  // instance.registerLazySingleton<CategoriesRemoteDataSource>(() =>
-  //     CategoriesRemoteDataSourceImpl(instance<AppCategoriesServiceClient>()));
-  //------------------------------------------ categories ------------------------------------------------------
 
   // remote data source
   instance.registerLazySingleton<RemoteDataSource>(

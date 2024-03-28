@@ -1,9 +1,10 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app/app_prefs.dart';
+import '../../app/app_shared.dart';
 import '../../app/constants.dart';
 import 'interceptor.dart';
 
@@ -18,28 +19,31 @@ const String device_id = "device_id";
 class DioFactory {
   final AppPreferences _appPreferences;
   late final DioInterceptor dioInterceptors;
+
   DioFactory(this._appPreferences);
 
   Future<Dio> getDio() async {
     Dio dio = Dio();
     dioInterceptors = DioInterceptor(dio);
-    String language = await _appPreferences.getAppLanguage();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String language = await prefs.getString('lang') ?? "en";
     String? token = await _appPreferences.getAccessToken() ?? '';
     String remberToken = ""; //await _appPreferences.getRemeberToken() ?? '';
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
       AUTHORIZATION: token == '' ? '' : "Bearer $token",
-      DEFAULT_LANGUAGE: 'ar',
-      device_type: Platform.isAndroid ? "1" : "2",
+      DEFAULT_LANGUAGE: language == "en" ? "ar" : "en",
+      //device_type: Platform.isAndroid ? "1" : "2",
       // device_id: AppShared.deviceId
     };
-
+    print('Token eee $token');
     dio.options = BaseOptions(
       baseUrl: Constants.baseUrl,
       headers: headers,
-      receiveTimeout: const Duration(milliseconds: Constants.apiTimeOut),
-      sendTimeout: const Duration(milliseconds: Constants.apiTimeOut),
+      receiveTimeout: Duration(seconds: Constants.apiTimeOut),
+      sendTimeout: Duration(seconds: Constants.apiTimeOut),
     );
 
     dio.interceptors.addAll(
@@ -52,16 +56,21 @@ class DioFactory {
                 (Response response, ResponseInterceptorHandler handler) =>
                     dioInterceptors.responseInterceptor(response, handler),
             onError: (DioError error, ErrorInterceptorHandler handler) {
-              print("kkkkkkkkkkkkkkkkkjhkg");
+              print("kkkkkkkkkkkkkkkkkjhkg ${error.response}}");
+              print(
+                  "kkkkkkkkkkkkkkkkkjhkg ${error.response?.headers['location']}}");
               dioInterceptors.errorInterceptor(error, handler);
             }),
         // performanceInterceptor,
         // its debug mode so print app logs
         PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          responseHeader: true,
-        )
+            requestHeader: true,
+            requestBody: true,
+            responseBody: true,
+            responseHeader: false,
+            error: true,
+            compact: true,
+            maxWidth: 90)
       ],
     );
 

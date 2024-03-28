@@ -8,7 +8,7 @@ class AppColors {
   static const Color textColor = Color(0xff000000);
   static const Color whiteColor = Colors.white;
   static const Color greyColor = Color(0xff695C5C);
-
+  static const Color orangeColor = Color(0xffF19035);
   static const LinearGradient buttonBlue = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,

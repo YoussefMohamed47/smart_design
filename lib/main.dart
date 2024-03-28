@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:clean_arch_base/screens/app%20walkthrough/app_walkthrought.dart';
+import 'package:clean_arch_base/presentation/screens/app%20walkthrough/app_walkthrought.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -72,14 +72,14 @@ Future<void> main() async {
             locale: EasyLocalization.of(context)!.locale,
             debugShowCheckedModeBanner: false,
             //showPerformanceOverlay: true,
-            title: 'Alassema',
+            title: 'Base Clean Arch',
             onGenerateRoute: RouteGenerator.getRoute,
             initialRoute: Routes.splashRoute,
             home: child,
             builder: (BuildContext context, Widget? child) {
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(
-                  textScaleFactor: 1.0,
+                  textScaler: const TextScaler.linear(1.0),
                 ), //set desired text scale factor here
                 child: child!,
               );
