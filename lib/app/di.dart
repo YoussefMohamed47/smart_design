@@ -1,3 +1,5 @@
+import 'package:clean_arch_base/data/repository/login/login_repo_impl.dart';
+import 'package:clean_arch_base/domain/repository/login/login_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -8,6 +10,8 @@ import '../data/data_source/remote_data_source.dart';
 import '../data/network/app_api.dart';
 import '../data/network/dio_factory.dart';
 import '../data/network/network_info.dart';
+import '../domain/usecase/login/login_use_case.dart';
+import '../presentation/screens/login/view model/login_view_model.dart';
 import 'app_prefs.dart';
 
 final instance = GetIt.instance;
@@ -42,39 +46,17 @@ Future<void> initAppModule() async {
   // local data source
   instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
 
-  // repository
+  // ----------------- repositories -----------------
 
-  // instance.registerLazySingleton<AuthRepository>(
-  //     () => AuthRepositoryImpl(instance(), instance(), instance()));
-  // instance.registerLazySingleton<HomeReposityory>(
-  //     () => HomeRepositoryImpl(instance(), instance(), instance()));
-  // instance.registerLazySingleton<AllMallsRepoistory>(
-  //     () => AllMallsRepositoryImpl(instance(), instance(), instance()));
-  // instance.registerLazySingleton<AllCompoundsRepoistory>(
-  //     () => AllCompoundsRepositoryImpl(instance(), instance(), instance()));
-  // instance.registerLazySingleton<AllCompaniesRepoistory>(
-  //     () => AllCompaniesRepositoryImpl(instance(), instance(), instance()));
-  //instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
-  // instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+  instance.registerLazySingleton<LoginRepository>(
+      () => LoginRepositoryImpl(instance(), instance(), instance()));
 
-  // instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
-  // instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
-  // instance
-  //     .registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
-  // instance.registerFactory<ImagePicker>(() => ImagePicker());
-  // instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
-  // instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
-  // instance
-  //     .registerFactory<AllMallsViewModel>(() => AllMallsViewModel(instance()));
-  // instance.registerFactory<AllMallsUseCase>(() => AllMallsUseCase(instance()));
-  // instance.registerFactory<AllCompoundsViewModel>(
-  //     () => AllCompoundsViewModel(instance()));
-  // instance.registerFactory<AllCompoundsUseCase>(
-  //     () => AllCompoundsUseCase(instance()));
-  // instance.registerFactory<AllCompaniesViewModel>(
-  //     () => AllCompaniesViewModel(instance()));
-  // instance.registerFactory<AllCompaniesUseCase>(
-  //     () => AllCompaniesUseCase(instance()));
+  // ----------------- use cases -----------------
+  instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+
+  // ----------------- view models -----------------
+
+  instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
 }
 
 initLoginModule() {

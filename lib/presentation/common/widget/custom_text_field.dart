@@ -71,6 +71,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      shadowColor: Colors.grey.withOpacity(0.4),
+      elevation: 6,
+      borderRadius: BorderRadius.circular(16),
       color: Colors.transparent,
       child: TextFormField(
         controller: widget.textEditingController,
@@ -113,16 +116,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                               horizontal: 8.0, vertical: 8.h),
                           child: !visible
                               ? Icon(
-                                  Icons.visibility_rounded,
-                                  color: HexColor('#FF6600'),
-                                  size: 28.h,
+                                  Icons.visibility_outlined,
+                                  size: 20.h,
                                 )
                               : Padding(
                                   padding: EdgeInsets.zero,
                                   child: SvgPicture.asset(
                                     AppImagesPath.passwordEyeIcon,
-                                    width: 28.w,
-                                    height: 28.h,
+                                    width: 20.w,
+                                    height: 20.h,
                                   ),
                                 ),
                         )
@@ -146,14 +148,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),
             borderSide: BorderSide(
-              color: HexColor('#FF6600'),
+              color: widget.borderColor ?? Colors.transparent,
               width: 1,
             ), //<-- SEE HERE
           ),
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),
             borderSide: BorderSide(
-              color: HexColor('#707070'),
+              color: widget.borderColor ?? Colors.transparent,
             ),
           ),
           errorStyle: TextStyle(
