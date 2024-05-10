@@ -1,13 +1,11 @@
 import 'dart:io';
-
-import 'package:clean_arch_base/presentation/screens/app%20walkthrough/app_walkthrought.dart';
+import 'package:clean_arch_base/presentation/screens/splash/view/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 import 'app/Caching/AppResponseCacheService.dart';
 import 'app/app_shared.dart';
@@ -87,6 +85,6 @@ Future<void> main() async {
             navigatorKey: AppShared.navKey,
           );
         },
-        child: const AppWalkthroughScreen(),
+        child: const SplashScreen(),
       ))));
 }
