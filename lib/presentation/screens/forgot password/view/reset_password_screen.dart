@@ -5,28 +5,29 @@ import 'package:clean_arch_base/presentation/common/widget/custom_text_field.dar
 import 'package:clean_arch_base/presentation/common/widget/loading_widget.dart';
 import 'package:clean_arch_base/presentation/resources/assets_manager.dart';
 import 'package:clean_arch_base/presentation/resources/base_page_route.dart';
-import 'package:clean_arch_base/presentation/screens/forgot%20password/view/reset_password_screen.dart';
+import 'package:clean_arch_base/presentation/screens/forgot%20password/view%20model/forgot_password_view_model.dart';
+import 'package:clean_arch_base/presentation/screens/forgot%20password/view/otp_screen.dart';
 import 'package:clean_arch_base/presentation/screens/login/view%20model/login_view_model.dart';
 import 'package:clean_arch_base/utils/strings/appStrings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  LoginViewModel _loginViewModel = instance<LoginViewModel>();
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  ForgotPasswordViewModel _forgotPasswordViewModel =
+      instance<ForgotPasswordViewModel>();
   initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _loginViewModel.start();
+      _forgotPasswordViewModel.start();
     });
   }
 
@@ -41,10 +42,10 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
-        child: StreamBuilder<LoginUseCaseModel>(
-            stream: _loginViewModel.outputLoginContent,
+        child: StreamBuilder<ForgotPasswordUseCaseModel>(
+            stream: _forgotPasswordViewModel.outputForgotPasswordContent,
             builder: (context, snapshot) {
-              LoginUseCaseModel? data = snapshot.data;
+              ForgotPasswordUseCaseModel? data = snapshot.data;
               return data != null
                   ? Container(
                       height: MediaQuery.of(context).size.height,
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: SingleChildScrollView(
                         child: Form(
-                          key: data.formKey,
+                          key: data.resetPasswordFormKey,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -63,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               SizedBox(height: 30.h),
                               Text(
-                                'Sign in Your Account',
+                                'Reset Your Password',
                                 style: TextStyle(
                                   fontSize: 22.sp,
                                   color: HexColor('1f2f62'),
@@ -73,42 +74,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               SizedBox(height: 8.h),
                               Text(
-                                'Enter Your Username and Password\n Sent to your email',
+                                "Kindly enter the phone number, We'll send you a\n link to reset your password.",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
+                                  fontSize: 11.sp,
+                                  color: HexColor('878686'),
                                   fontWeight: FontWeight.w400,
                                   fontFamily: 'Poppins',
                                 ),
                               ),
                               SizedBox(height: 30.h),
                               CustomTextField(
-                                textEditingController: data.userNameController,
-                                keyboardType: TextInputType.text,
-                                borderColor: Colors.transparent,
-                                fieldValidator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your username';
-                                  }
-                                  return null;
-                                },
-                                hint: 'User Name',
-                                hintTextColor: HexColor('989797'),
-                                hintFontFamily:
-                                    AppStringsFonts.fontFamilyRegular,
-                                hintFontSize: 12.sp,
-                                fillColor: Colors.white,
-                                borderRadius: 16,
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 14,
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              CustomTextField(
-                                textEditingController: data.passwordController,
-                                keyboardType: TextInputType.text,
+                                textEditingController:
+                                    data.phoneNumberController,
+                                keyboardType: TextInputType.phone,
                                 borderColor: Colors.transparent,
                                 fieldValidator: (value) {
                                   if (value!.isEmpty) {
@@ -116,12 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }
                                   return null;
                                 },
-                                hint: 'Password',
+                                hint: 'Add phone number',
                                 hintTextColor: HexColor('989797'),
                                 hintFontFamily:
                                     AppStringsFonts.fontFamilyRegular,
                                 hintFontSize: 12.sp,
-                                isPassword: true,
                                 fillColor: Colors.white,
                                 borderRadius: 16,
                                 contentPadding: const EdgeInsets.symmetric(
@@ -129,44 +107,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                   vertical: 14,
                                 ),
                               ),
-                              SizedBox(height: 12.h),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        BasePageRoute(
-                                          builder: (context) =>
-                                              ResetPasswordScreen(),
-                                        ),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Forgot Password?',
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily:
-                                            AppStringsFonts.fontFamilyBold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
                               SizedBox(height: 40.h),
                               CustomButton(
                                 width: 200.w,
-                                height: 30.h,
-                                title: 'Login',
+                                height: 35.h,
+                                title: 'Submit',
                                 borderRadius: 16,
                                 fontFamily: AppStringsFonts.fontFamilyRegular,
                                 fontWeight: FontWeight.normal,
                                 fontSize: 16.sp,
                                 buttonColor: HexColor('1f2f62'),
                                 textColor: Colors.white,
+                                onpress: () {
+                                  Navigator.push(
+                                      context,
+                                      BasePageRoute(
+                                          builder: (_) => OTPScreen(
+                                                data: data,
+                                                viewModel:
+                                                    _forgotPasswordViewModel,
+                                              )));
+                                },
                               )
                             ],
                           ),

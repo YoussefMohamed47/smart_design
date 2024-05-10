@@ -1,5 +1,9 @@
+import 'package:clean_arch_base/data/repository/forgot%20password/forgot_password_repo_impl.dart';
 import 'package:clean_arch_base/data/repository/login/login_repo_impl.dart';
+import 'package:clean_arch_base/domain/repository/Forgot%20password/forgot_password_repository.dart';
 import 'package:clean_arch_base/domain/repository/login/login_repository.dart';
+import 'package:clean_arch_base/domain/usecase/Forgot%20Password/forgot_password_use_case.dart';
+import 'package:clean_arch_base/presentation/screens/forgot%20password/view%20model/forgot_password_view_model.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -50,13 +54,19 @@ Future<void> initAppModule() async {
 
   instance.registerLazySingleton<LoginRepository>(
       () => LoginRepositoryImpl(instance(), instance(), instance()));
+  instance.registerLazySingleton<ForgotPasswordRepository>(
+      () => ForgotPasswordRepositoryImpl(instance(), instance(), instance()));
 
   // ----------------- use cases -----------------
   instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+  instance.registerFactory<ForgotPasswordUseCase>(
+      () => ForgotPasswordUseCase(instance()));
 
   // ----------------- view models -----------------
 
   instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  instance.registerFactory<ForgotPasswordViewModel>(
+      () => ForgotPasswordViewModel(instance()));
 }
 
 initLoginModule() {

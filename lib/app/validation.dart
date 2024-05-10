@@ -9,11 +9,11 @@ class Validation {
   static String? isEmptyValidator(
     BuildContext context,
     String? value,
-    //  String name,
+    String fieldName,
   ) {
     //  value = value!.cleanupWhiteSpace();
     if (value!.isEmpty || value.trim().isEmpty) {
-      return tr('Please Enter Name');
+      return tr('Please Enter $fieldName');
     } else {
       return null;
     }
@@ -24,7 +24,6 @@ class Validation {
     if (value.length < minLength) {
       return tr(
           'Enter Min Length For the Field'); //EasyLocalization.of(context)?.pleaseEnterMinLength("$minLength") ??
-
     } else {
       return null;
     }
